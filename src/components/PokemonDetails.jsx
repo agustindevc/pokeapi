@@ -4,7 +4,7 @@ const PokemonDetails = ({pokemon}) => {
   return (
     <Popover.Root lazyMount unmountOnExit>
       <Popover.Trigger asChild>
-        <Button size="sm" variant="outline">
+        <Button size="sm" color={"white"} background={"black"} border={"1px solid grey"}>
           Ver Detalles
         </Button>
       </Popover.Trigger>

@@ -6,8 +6,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: red;
-    /*background-image: url("./assets/images/backgound.jpg");*/
+    background-image: url("./assets/images/background.jpg");
     font-family: "Press Start 2P", system-ui;
     font-weight: 30;
     font-style: normal;
