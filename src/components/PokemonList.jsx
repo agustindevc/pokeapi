@@ -31,8 +31,8 @@ function PokemonList() {
           return {
             id: data.id,
             name: data.name,
-            //img: data.sprites.other.showdown.front_default,
-            img: data.sprites.other.dream_world.front_default,
+            img: data.sprites.other.showdown.front_default,
+            //img: data.sprites.other.dream_world.front_default,
             imggif: data.sprites.other.showdown.front_default,
             types: data.types.map(type => type.type.name),
             stats: data.stats.map(stat => ({
