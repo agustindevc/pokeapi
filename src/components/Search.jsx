@@ -22,7 +22,7 @@ export const Search = ({ onSearch }) => {
   return (
     <section className="search">
       {/* Etiqueta descriptiva para el campo de búsqueda */}
-      <label htmlFor="pokemonSearch" style={{ marginBottom: "5px", color: "black", fontSize: "1.5vh" }}>
+      <label htmlFor="pokemonSearch" style={{ marginBottom: "5px", color: "white", fontSize: "1.5vh" }}>
         Buscar
       </label>
       
