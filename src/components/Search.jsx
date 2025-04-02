@@ -21,16 +21,12 @@ export const Search = ({ onSearch }) => {
 
   return (
     <section className="search">
-      {/* Etiqueta descriptiva para el campo de búsqueda */}
-      <label htmlFor="pokemonSearch" style={{ marginBottom: "5px", color: "white", fontSize: "1.5vh" }}>
-        Buscar
-      </label>
-      
       {/* Input con un icono de búsqueda al inicio */}
       <InputGroup flex="1" style={{ maxWidth: '500px', background: "black" }}>
         <Input
           id="pokemonSearch"
           placeholder="nombre del pokemon" // Placeholder que indica qué buscar
+          boxShadow= "md"
           value={searchText} // El valor del input está vinculado al estado
           onChange={handleChange} // Actualizar el estado cuando el texto cambia
           onKeyDown={(e) => {

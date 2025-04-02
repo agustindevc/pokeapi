@@ -1,5 +1,3 @@
-
-
 html, body {
     margin: 0;
     padding: 0;
@@ -10,7 +8,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("./assets/images/background.jpg");
+    background-image: url("./assets/images/blueBackground.jpg");
     background-size: cover; /* Hace que la imagen cubra toda la pantalla */
     background-position: center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita la repetición de la imagen */
@@ -113,4 +111,3 @@ html, body {
     background-color: #888; /* Cambia el color si el botón está deshabilitado */
     cursor: not-allowed;
 }
-
