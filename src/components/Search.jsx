@@ -4,41 +4,34 @@ import { useState } from "react";
 import Button from "./Button";
 
 export const Search = ({ onSearch }) => {
-  // Estado para manejar el texto ingresado en el campo de búsqueda
   const [searchText, setSearchText] = useState("");
 
-  // Función que se ejecuta cada vez que cambia el valor del input
   const handleChange = (e) => {
-    setSearchText(e.target.value); // Actualizar el estado con el valor del input
+    setSearchText(e.target.value);
   };
 
-  // Función que se ejecuta cuando el usuario realiza una búsqueda
   const handleSearch = () => {
     if (onSearch) {
-      onSearch(searchText); // Pasar el texto de búsqueda al componente padre
+      onSearch(searchText);
     }
   };
 
   return (
     <section className="search">
-      {/* Input con un icono de búsqueda al inicio */}
       <InputGroup flex="1" style={{ maxWidth: '500px', background: "black" }}>
         <Input
           id="pokemonSearch"
-          placeholder="nombre del pokemon" // Placeholder que indica qué buscar
+          placeholder="nombre del pokemon"
           boxShadow= "md"
-          value={searchText} // El valor del input está vinculado al estado
-          onChange={handleChange} // Actualizar el estado cuando el texto cambia
+          value={searchText}
+          onChange={handleChange}
           onKeyDown={(e) => {
-            // Ejecutar búsqueda cuando se presiona "Enter"
             if (e.key === "Enter") {
               handleSearch(); 
             }
           }}
         />
       </InputGroup>
-
-      {/* Botón para activar la búsqueda manualmente */}
       <Button onClick={handleSearch} text={<LuSearch />} />
     </section>
   );
