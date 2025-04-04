@@ -87,15 +87,6 @@ html, body {
     font-size: 2vh;
 }
 
-/* Estilo para los botones de paginación */
-.pagination {
-    display: flex;
-    justify-content: center; /* Centra los botones horizontalmente */
-    align-items: center; /* Centra los botones verticalmente si hay más de uno */
-    gap: 20px; /* Espacio entre los botones */
-    margin: 20px; /* Espacio entre las tarjetas y los botones */
-    width: 100%; /* Asegura que ocupe todo el ancho */
-}
 
 /* Puedes añadir estilos adicionales para los botones si lo deseas */
 .pagination button {
@@ -110,4 +101,16 @@ html, body {
 .pagination button:disabled {
     background-color: #888; /* Cambia el color si el botón está deshabilitado */
     cursor: not-allowed;
+}
+
+/* Estilo global para Skeleton */
+.skeleton-blue {
+    background-color: rgba(0, 0, 255, 0.3); /* Azul semitransparente */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Si deseas que todos los Skeletons tengan estos estilos globalmente, usa esta regla */
+.react-loading-skeleton {
+    background-color: rgba(0, 0, 255, 0.3) !important; /* Azul semitransparente */
+    border-radius: 8px; /* Bordes redondeados */
 }
