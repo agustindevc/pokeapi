@@ -23,7 +23,6 @@ const PokemonDetails = ({ pokemon }) => {
                 <img src={pokemon.imggif} alt={pokemon.name} /> {/* Imagen animada del Pokémon */}
                 <br />
                 <strong>Estadísticas:</strong>
-                {/* Lista de estadísticas del Pokémon */}
                 <ul>
                   {pokemon.stats.map((stat, index) => (
                     <li key={index}>

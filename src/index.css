@@ -2,17 +2,17 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     min-height: 100vh;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-image: url("./assets/images/blueBackground.jpg");
-    background-size: cover; /* Hace que la imagen cubra toda la pantalla */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita la repetición de la imagen */
-    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
     font-family: "Press Start 2P", system-ui;
     font-weight: 30;
     font-style: normal;
@@ -102,16 +102,4 @@ html, body {
 .pagination button:disabled {
     background-color: #888; /* Cambia el color si el botón está deshabilitado */
     cursor: not-allowed;
-}
-
-/* Estilo global para Skeleton */
-.skeleton-blue {
-    background-color: rgba(0, 0, 255, 0.3); /* Azul semitransparente */
-    border-radius: 8px; /* Bordes redondeados */
-}
-
-/* Si deseas que todos los Skeletons tengan estos estilos globalmente, usa esta regla */
-.react-loading-skeleton {
-    background-color: rgba(0, 0, 255, 0.3) !important; /* Azul semitransparente */
-    border-radius: 8px; /* Bordes redondeados */
 }

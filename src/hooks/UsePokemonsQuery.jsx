@@ -1,25 +1,25 @@
-// src/hooks/usePokemonsQuery.js
-
 import { useQuery } from '@tanstack/react-query';
-import { fetchPokemons, fetchPokemonDetails } from '../utils/fetchData';
+import { fetchPokemons, fetchPokemonDetails } from '../services/pokemonService';
 
 const usePokemonsQuery = (page, limit) => {
-  const { data, isLoading, error } = useQuery({
+  // Trae la lista paginada de pokémon
+  const { data, error } = useQuery({
     queryKey: ['pokemons', page],
     queryFn: () => fetchPokemons(page, limit),
     keepPreviousData: true,
   });
 
-  const { data: pokemonDetails, isLoading: isLoadingDetails } = useQuery({
+  // Trae los detalles de todos los pokémon listados
+  const { data: pokemonDetails } = useQuery({
     queryKey: ['pokemonDetails', data?.results?.map(pokemon => pokemon.url)],
-    queryFn: () => Promise.all(data?.results?.map(pokemon => fetchPokemonDetails(pokemon.url))),
+    queryFn: () =>
+      Promise.all(data?.results?.map(pokemon => fetchPokemonDetails(pokemon.url))),
     enabled: !!data,
   });
 
   return {
     pokemonData: data,
     pokemonDetails,
-    isLoading: isLoading || isLoadingDetails,
     error
   };
 };
