@@ -1,7 +1,6 @@
-// src/components/PokemonList.jsx
 
 import { useState, useEffect } from "react";
-import { Spinner, Box } from "@chakra-ui/react";
+import { Spinner, Box, Skeleton } from "@chakra-ui/react";
 import PokemonCard from "./PokemonCard";
 import MyPagination from "./MyPagination";
 import Search from "./Search";
@@ -60,10 +59,10 @@ function PokemonList() {
           <Search onSearch={handleSearch} />
           {loading && (
             <Box display="flex" justifyContent="center" mt={4}>
-              <Spinner size="xl" color="yellow" speed="0.75s" marginTop= "5%"/>
+              <Spinner size="xl" color="yellow" speed="0.75s" marginTop="5%" />
             </Box>
           )}
-          {errorMessage && <p style={{ color: "yellow", fontWeight: "bold", fontSize: "12px", marginTop: "5%"}}>{errorMessage}</p>}
+          {errorMessage && <p style={{ color: "yellow", fontWeight: "bold", fontSize: "12px", marginTop: "5%" }}>{errorMessage}</p>}
           {error && <p style={{ color: "yellow", fontWeight: "bold", fontSize: "12px" }}>{error.message}</p>}
         </div>
 
@@ -81,15 +80,15 @@ function PokemonList() {
       {searchedPokemonData && (
         <div className="highlighted-pokemon" style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
           <div style={{ border: "3px solid yellow", padding: "10px", textAlign: "center" }}>
-            <PokemonCard pokemon={searchedPokemonData} />
+              <PokemonCard pokemon={searchedPokemonData} />
           </div>
         </div>
       )}
-
+      
       <div className="card-container">
         {pokemonDetails?.map(pokemon => (
           <div key={pokemon.id} style={{ border: pokemon.id === highlightedPokemon ? "3px solid yellow" : "none", padding: "5px" }}>
-            <PokemonCard pokemon={pokemon} />
+              < PokemonCard pokemon={pokemon} />
           </div>
         ))}
       </div>
