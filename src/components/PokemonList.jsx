@@ -4,7 +4,6 @@ import { Spinner, Box, Skeleton } from "@chakra-ui/react";
 import PokemonCard from "./PokemonCard";
 import MyPagination from "./MyPagination";
 import Search from "./Search";
-import Pokemon_Logo from '../assets/images/Pokemon_logo.png';
 import usePokemonsQuery from '../hooks/UsePokemonsQuery';
 import usePokemonSearch from '../hooks/UsePokemonsSearch';
 
@@ -54,7 +53,7 @@ function PokemonList() {
   return (
     <div>
       <section className="head">
-        <img className="logo" src={Pokemon_Logo} alt="Pokemon Logo" />
+
         <div>
           <Search onSearch={handleSearch} />
           {loading && (

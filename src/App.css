@@ -1,0 +1,16 @@
+.head {
+    margin-top: 10px;
+    padding: 30px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Asegura que se centre también en el eje vertical */
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 30;
+    font-style: normal;
+    font-size: 25px;
+    gap: 3vh;
+    text-align: center; /* Asegura que el texto esté centrado */
+}

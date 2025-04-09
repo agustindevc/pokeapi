@@ -1,18 +1,17 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './App.css'
 import PokemonList from './components/PokemonList'
+import Logo from './components/Logo';
 
-// Crea una instancia de QueryClient
 const queryClient = new QueryClient();
 
 function App() {
 
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <PokemonList />
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Logo />
+      <PokemonList />
+    </QueryClientProvider>
   )
 }
 

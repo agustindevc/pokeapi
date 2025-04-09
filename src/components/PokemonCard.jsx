@@ -6,7 +6,6 @@ const PokemonCard = ({ pokemon }) => {
   const formattedName = name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
 
   return (
-
     <Card.Root
       width={["165px", "250px", "300px"]} 
       height={["auto", "350px", "350px"]} 
