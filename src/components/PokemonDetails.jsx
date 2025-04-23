@@ -4,8 +4,17 @@ const PokemonDetails = ({ pokemon }) => {
   return (
     <Popover.Root lazyMount unmountOnExit>
       <Popover.Trigger asChild>
-        <Button size="sm" color={"white"} background={"black"} border={"1px solid grey"}>
-          Ver Detalles
+        <Button 
+          size="sm" 
+          position="absolute"
+          top="0"
+          left="0"
+          width="100%"
+          height="100%"
+          background="transparent"
+          _hover={{ background: "rgba(0, 0, 0, 0.1)" }}
+          border="none"
+        >
         </Button>
       </Popover.Trigger>
       <Portal>
@@ -14,11 +23,11 @@ const PokemonDetails = ({ pokemon }) => {
             <Popover.Arrow />
             <Popover.Body>
               <div>
-                <img src={pokemon.imggif} alt={pokemon.name} />
+                {pokemon?.imggif && <img src={pokemon.imggif} alt={pokemon.name} />}
                 <br />
                 <strong>Estadísticas:</strong>
                 <ul>
-                  {pokemon.stats.map((stat, index) => (
+                  {pokemon?.stats?.map((stat, index) => (
                     <li key={index}>
                       {stat.name}: {stat.value}
                     </li>
@@ -34,4 +43,3 @@ const PokemonDetails = ({ pokemon }) => {
 };
 
 export default PokemonDetails;
-

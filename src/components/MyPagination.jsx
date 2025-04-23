@@ -1,38 +1,30 @@
-import { ButtonGroup, IconButton, Button } from "@chakra-ui/react";
+import React from "react";
+import { ButtonGroup, IconButton, Text } from "@chakra-ui/react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import { Pagination } from "@chakra-ui/react";
 
-const MyPagination = ({ page, totalPages, onPrevPage, onNextPage, onPageChange }) => {
+const MyPagination = ({ page, totalPages, onPageChange }) => {
   return (
-    
-    <Pagination.Root
-      count={totalPages} 
-      pageSize={1}       
-      page={page}        
-      onPageChange={(newPage) => {
-        
-        if (typeof newPage === "number") {
-          onPageChange(newPage); 
-        }
-      }}
-    >
-      <ButtonGroup gap="4" size="sm" variant="ghost">
-       
-        <Pagination.PrevTrigger asChild>
-          <IconButton onClick={onPrevPage} isDisabled={page <= 1}>
-            <HiChevronLeft /> 
-          </IconButton>
-        </Pagination.PrevTrigger>
+    <ButtonGroup gap="4" size="sm" variant="ghost" justifyContent="center">
+      <IconButton
+        onClick={() => onPageChange(page - 1)}
+        isDisabled={page <= 1}
+        aria-label="Página anterior"
+      >
+        <HiChevronLeft />
+      </IconButton>
 
-        <Pagination.PageText />
+      <Text>
+        Página {page} de {totalPages}
+      </Text>
 
-        <Pagination.NextTrigger asChild>
-          <IconButton onClick={onNextPage} isDisabled={page >= totalPages}>
-            <HiChevronRight />
-          </IconButton>
-        </Pagination.NextTrigger>
-      </ButtonGroup>
-    </Pagination.Root>
+      <IconButton
+        onClick={() => onPageChange(page + 1)}
+        isDisabled={page >= totalPages}
+        aria-label="Página siguiente"
+      >
+        <HiChevronRight />
+      </IconButton>
+    </ButtonGroup>
   );
 };
 

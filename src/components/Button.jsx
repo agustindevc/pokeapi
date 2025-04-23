@@ -1,5 +1,5 @@
 import { Button as ChakraButton } from "@chakra-ui/react";
-const CustomButton = ({ text, onClick, disabled }) => {
+const Button = ({ text, onClick, disabled }) => {
   return (
     <ChakraButton onClick={onClick} disabled={disabled}>
       {text}
@@ -7,4 +7,4 @@ const CustomButton = ({ text, onClick, disabled }) => {
   );
 };
 
-export default CustomButton;
+export default Button;

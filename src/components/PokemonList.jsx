@@ -1,108 +1,88 @@
-
-import { useState, useEffect } from "react";
-import { Spinner, Box, Skeleton } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchAllPokemons } from "../services/pokemonService";
 import PokemonCard from "./PokemonCard";
 import MyPagination from "./MyPagination";
-import Search from "./Search";
-import usePokemonsQuery from '../hooks/UsePokemonsQuery';
-import usePokemonSearch from '../hooks/UsePokemonsSearch';
+import { Box, Center, Text, Heading, Flex, VStack, Spinner } from "@chakra-ui/react";
 
+const PokemonList = ({ filteredPokemons }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const pokemonsPerPage = 15;
 
-function PokemonList() {
-  const [page, setPage] = useState(1);
-  const limit = 15;
-  const [totalPages, setTotalPages] = useState(1);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [highlightedPokemon, setHighlightedPokemon] = useState(null);
-  const [searchText, setSearchText] = useState("");
+  const { data: pokemons = [], isLoading } = useQuery({
+    queryKey: ["pokemonList"],
+    queryFn: fetchAllPokemons,
+  });
 
-  const { pokemonData, pokemonDetails, error } = usePokemonsQuery(page, limit);
-  const {
-    data: searchedPokemonData,
-    isFetching: loading,
-    error: searchError
-  } = usePokemonSearch(searchText, !!searchText);
+  const totalPokemons = pokemons.length;
+  const totalPages = Math.ceil(totalPokemons / pokemonsPerPage);
 
-  useEffect(() => {
-    if (pokemonData) {
-      setTotalPages(Math.ceil(pokemonData.count / limit));
-    }
-  }, [pokemonData]);
-
-  useEffect(() => {
-    if (searchedPokemonData) {
-      const pokemonPage = Math.ceil(searchedPokemonData.id / limit);
-      setPage(pokemonPage);
-      setHighlightedPokemon(searchedPokemonData.id);
-    }
-  }, [searchedPokemonData]);
-
-  useEffect(() => {
-    if (searchError) {
-      setErrorMessage("No se encontró ningún Pokémon con ese nombre.");
-    } else {
-      setErrorMessage("");
-    }
-  }, [searchError]);
-
-  const handleSearch = (text) => {
-    if (!text) return;
-    setSearchText(text);
-  };
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+  const currentPokemons = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
   return (
-    <div>
-      <section className="head">
-
-        <div>
-          <Search onSearch={handleSearch} />
-          {loading && (
-            <Box display="flex" justifyContent="center" mt={4}>
-              <Spinner size="xl" color="yellow" speed="0.75s" marginTop="5%" />
-            </Box>
-          )}
-          {errorMessage && <p style={{ color: "yellow", fontWeight: "bold", fontSize: "12px", marginTop: "5%" }}>{errorMessage}</p>}
-          {error && <p style={{ color: "yellow", fontWeight: "bold", fontSize: "12px" }}>{error.message}</p>}
-        </div>
-
-        <div className="pagination">
-          <MyPagination
-            page={page}
-            totalPages={totalPages}
-            onPrevPage={() => setPage(prev => Math.max(prev - 1, 1))}
-            onNextPage={() => setPage(prev => Math.min(prev + 1, totalPages))}
-            onPageChange={setPage}
-          />
-        </div>
-      </section>
-
-      {searchedPokemonData && (
-        <div className="highlighted-pokemon" style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-          <div style={{ border: "3px solid yellow", padding: "10px", textAlign: "center" }}>
-              <PokemonCard pokemon={searchedPokemonData} />
-          </div>
-        </div>
+    <Box mx="auto" textAlign="center" my={8}>
+      {isLoading && (
+        <Center>
+          <Spinner size="xl" />
+          <Text ml={4}>Cargando Pokémon...</Text>
+        </Center>
       )}
-      
-      <div className="card-container">
-        {pokemonDetails?.map(pokemon => (
-          <div key={pokemon.id} style={{ border: pokemon.id === highlightedPokemon ? "3px solid yellow" : "none", padding: "5px" }}>
-              < PokemonCard pokemon={pokemon} />
-          </div>
-        ))}
-      </div>
 
-      <div className="pagination">
-        <MyPagination
-          page={page}
-          totalPages={totalPages}
-          onPrevPage={() => setPage(prev => Math.max(prev - 1, 1))}
-          onNextPage={() => setPage(prev => Math.min(prev + 1, totalPages))}
-          onPageChange={setPage}
-        />
-      </div>
-    </div>
+      <Text as="h3" fontSize="md">
+        Toca sobre el pokemon para ver detalles
+      </Text>
+
+      {!isLoading && (
+        <VStack spacing={6}>
+          {filteredPokemons.length > 0 && (
+            <Flex
+              wrap="wrap"
+              justify="center"
+              gap={5}
+              p={5}
+              mb={5}
+            >
+              {filteredPokemons.map((pokemon) => (
+                <Box key={pokemon.id}>
+                  <PokemonCard pokemon={pokemon} />
+                </Box>
+              ))}
+            </Flex>
+          )}
+
+          <MyPagination
+            my={9}
+            page={currentPage}
+            totalPages={totalPages}
+            onPageChange={(newPage) => setCurrentPage(newPage)}
+          />
+
+
+
+          <Flex
+            wrap="wrap"
+            justify="center"
+            gap={5}
+            p={5}
+          >
+            {currentPokemons.map((pokemon) => (
+              <Box key={pokemon.id}>
+                <PokemonCard pokemon={pokemon} />
+              </Box>
+            ))}
+          </Flex>
+
+          <MyPagination
+            page={currentPage}
+            totalPages={totalPages}
+            onPageChange={(newPage) => setCurrentPage(newPage)}
+          />
+        </VStack>
+      )}
+    </Box>
   );
-}
+};
 
 export default PokemonList;
