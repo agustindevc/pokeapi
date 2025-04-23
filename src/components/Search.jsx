@@ -42,7 +42,7 @@ export const Search = ({ onSearchResults }) => {
       <Stack
         direction="row"
         spacing={3}
-        w="100%"
+        w="60%"
         maxW="600px"
         align="center"
         justify="center"
@@ -65,10 +65,10 @@ export const Search = ({ onSearchResults }) => {
       {hasSearched && (
         <Button onClick={handleClear} text="Limpiar búsqueda" />
       )}
-      
+
       {noResults && (
-        <Text 
-          color="yellow.300" 
+        <Text
+          color="yellow.300"
           fontSize="xl"
           textAlign="center"
         >
