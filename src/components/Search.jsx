@@ -42,7 +42,7 @@ export const Search = ({ onSearchResults }) => {
       <Stack
         direction="row"
         spacing={3}
-        w="60%"
+        w="66%"
         maxW="600px"
         align="center"
         justify="center"

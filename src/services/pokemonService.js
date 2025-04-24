@@ -1,8 +1,9 @@
-import { API_BASE_URL } from "../config/globals";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const fetchAllPokemons = async () => {
+
   try {
-    const response = await fetch(`${API_BASE_URL}?limit=1025`);
+    const response = await fetch(`${apiUrl}?limit=1025`);
     if (!response.ok) {
       throw new Error("Error al obtener los datos de los Pokémon.");
     }
@@ -33,7 +34,7 @@ const formatPokemonDetails = (data) => ({
   abilities: data.abilities.map((ability) => ability.ability.name),
   height: data.height,
   weight: data.weight,
-  species: data.species.name,
+  species: data.species.name
 });
 
 export const fetchPokemonDetails = async (url) => {
