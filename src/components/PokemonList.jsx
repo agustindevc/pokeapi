@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchAllPokemons } from "../services/pokemonService";
 import PokemonCard from "./PokemonCard";
 import MyPagination from "./MyPagination";
-import { Box, Center, Text, Heading, Flex, VStack, Spinner } from "@chakra-ui/react";
+import { Box, Center, Text, Flex, VStack, Spinner } from "@chakra-ui/react";
 
 const PokemonList = ({ filteredPokemons }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,12 +14,14 @@ const PokemonList = ({ filteredPokemons }) => {
     queryFn: fetchAllPokemons,
   });
 
-  const totalPokemons = pokemons.length;
+  // Determinar qué lista de pokémon usar
+  const displayPokemons = filteredPokemons.length > 0 ? filteredPokemons : pokemons;
+  const totalPokemons = displayPokemons.length;
   const totalPages = Math.ceil(totalPokemons / pokemonsPerPage);
 
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+  const currentPokemons = displayPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
   return (
     <Box mx="auto" textAlign="center" my={8}>
@@ -36,30 +38,11 @@ const PokemonList = ({ filteredPokemons }) => {
 
       {!isLoading && (
         <VStack spacing={6}>
-          {filteredPokemons.length > 0 && (
-            <Flex
-              wrap="wrap"
-              justify="center"
-              gap={5}
-              p={5}
-              mb={5}
-            >
-              {filteredPokemons.map((pokemon) => (
-                <Box key={pokemon.id}>
-                  <PokemonCard pokemon={pokemon} />
-                </Box>
-              ))}
-            </Flex>
-          )}
-
           <MyPagination
-            my={9}
             page={currentPage}
             totalPages={totalPages}
             onPageChange={(newPage) => setCurrentPage(newPage)}
           />
-
-
 
           <Flex
             wrap="wrap"
