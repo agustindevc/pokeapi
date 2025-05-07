@@ -1,20 +1,16 @@
-import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchAllPokemons } from "../services/pokemonService";
+
 import PokemonCard from "./PokemonCard";
 import MyPagination from "./MyPagination";
 import { Box, Center, Text, Flex, VStack, Spinner } from "@chakra-ui/react";
+import { useGetPokemons } from "./hooks/useGetPokemons";
+import { useState } from "react";
 
 const PokemonList = ({ filteredPokemons }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pokemonsPerPage = 15;
 
-  const { data: pokemons = [], isLoading } = useQuery({
-    queryKey: ["pokemonList"],
-    queryFn: fetchAllPokemons,
-  });
+  const { data: pokemons = [], isLoading } = useGetPokemons();
 
-  // Determinar qué lista de pokémon usar
   const displayPokemons = filteredPokemons.length > 0 ? filteredPokemons : pokemons;
   const totalPokemons = displayPokemons.length;
   const totalPages = Math.ceil(totalPokemons / pokemonsPerPage);

@@ -1,7 +1,6 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export const fetchAllPokemons = async () => {
-
   try {
     const response = await fetch(`${apiUrl}?limit=1025`);
     if (!response.ok) {
@@ -13,7 +12,6 @@ export const fetchAllPokemons = async () => {
       id: index + 1,
       name: pokemon.name,
       url: pokemon.url,
-      img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
     }));
   } catch (error) {
     console.error(error);

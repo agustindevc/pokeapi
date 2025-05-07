@@ -1,28 +1,11 @@
-import { Card, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Card, Text, Skeleton, Stack } from "@chakra-ui/react";
 import backgroundImg from "../assets/images/cardBackground.jpg";
 import PokemonDetails from "./PokemonDetails";
-import { fetchPokemonDetails } from "../services/pokemonService";
+
+import { useGetPokemonByUrl } from "./hooks/useGetPokemonByurl";
 
 const PokemonCard = ({ pokemon }) => {
-  const [pokemonDetails, setPokemonDetails] = useState(null);
-  const { name, img, url } = pokemon || {};
-  const formattedName = name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
-
-  useEffect(() => {
-    const loadPokemonDetails = async () => {
-      try {
-        const details = await fetchPokemonDetails(url);
-        setPokemonDetails(details);
-      } catch (error) {
-        console.error("Error al cargar detalles del pokémon:", error);
-      }
-    };
-
-    if (url) {
-      loadPokemonDetails();
-    }
-  }, [url]);
+  const {data: pokemonDetails, isLoading} = useGetPokemonByUrl(pokemon.url);
 
   return (
     <div style={{ position: "relative" }}>
@@ -51,13 +34,24 @@ const PokemonCard = ({ pokemon }) => {
           p="4"
           borderRadius="md"
         >
-          <img
-            src={img}
-            alt={formattedName}
-            style={{ width: "150px", height: "150px", objectFit: "contain" }}
-          />
-          <Text mt="2" fontWeight="bold">{formattedName}</Text>
-          <PokemonDetails pokemon={pokemonDetails} />
+          {isLoading ? (
+            <Stack width="100%" spacing={4} align="center">
+              <Skeleton height="150px" width="150px" borderRadius="lg" />
+              <Skeleton height="20px" width="120px" />
+            </Stack>
+          ) : (
+            <>
+              <img
+                src={pokemonDetails.img}
+                alt={pokemonDetails.name}
+                style={{ width: "150px", height: "150px", objectFit: "contain" }}
+              />
+              <Text mt="2" fontWeight="bold">
+                {pokemonDetails.name.charAt(0).toUpperCase() + pokemonDetails.name.slice(1)}
+              </Text>
+              <PokemonDetails pokemon={pokemonDetails} />
+            </>
+          )}
         </Card.Body>
       </Card.Root>
     </div>
