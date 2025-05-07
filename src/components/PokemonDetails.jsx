@@ -1,4 +1,4 @@
-import { Button, Popover, Portal } from "@chakra-ui/react";
+import { Button, Popover, Portal, Box } from "@chakra-ui/react";
 
 const PokemonDetails = ({ pokemon }) => {
   return (
@@ -36,15 +36,15 @@ const PokemonDetails = ({ pokemon }) => {
               maxH="calc(80vh - 40px)"
               fontSize="sm"
             >
-              <div style={{ width: '100%' }}>
+              <Box width="100%">
                 {pokemon?.imggif && (
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <Box display="flex" justifyContent="center">
                     <img 
                       src={pokemon.imggif} 
                       alt={pokemon.name} 
                       style={{ maxWidth: '150px', height: 'auto' }}
                     />
-                  </div>
+                  </Box>
                 )}
                 <br />
                 <strong>Especie:</strong> {pokemon?.species}
@@ -53,27 +53,33 @@ const PokemonDetails = ({ pokemon }) => {
                 <br />
                 <strong>Peso:</strong> {pokemon?.weight / 10}kg
                 <br />
+                <strong>-------------------</strong>
+                <br />
                 <strong>Tipo:</strong>
-                <ul style={{ paddingLeft: '20px', margin: '8px 0' }}>
+                <Box as="ul" paddingLeft="20px" margin="8px 0">
                   {pokemon?.types?.map((type, index) => (
-                    <li key={index}>{type}</li>
+                    <Box as="li" key={index}>{type}</Box>
                   ))}
-                </ul>
+                </Box>
+                <strong>-------------------</strong>
+                <br />
                 <strong>Habilidades:</strong>
-                <ul style={{ paddingLeft: '20px', margin: '8px 0' }}>
+                <Box as="ul" paddingLeft="20px" margin="8px 0">
                   {pokemon?.abilities?.map((ability, index) => (
-                    <li key={index}>{ability}</li>
+                    <Box as="li" key={index}>{ability}</Box>
                   ))}
-                </ul>
+                </Box>
+                <strong>-------------------</strong>
+                <br />
                 <strong>Estadísticas:</strong>
-                <ul style={{ paddingLeft: '20px', margin: '8px 0' }}>
+                <Box as="ul" paddingLeft="20px" margin="8px 0">
                   {pokemon?.stats?.map((stat, index) => (
-                    <li key={index}>
+                    <Box as="li" key={index}>
                       {stat.name}: {stat.value}
-                    </li>
+                    </Box>
                   ))}
-                </ul>
-              </div>
+                </Box>
+              </Box>
             </Popover.Body>
           </Popover.Content>
         </Popover.Positioner>
