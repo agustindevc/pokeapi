@@ -1,43 +1,47 @@
-# Pokemon App
+# Pokémon Master-Details
 
-## Descripción
-Pokemon App es una página web con una interfaz estilo Master-Details que muestra una lista de Pokémons en tarjetas. La aplicación cuenta con paginación, mostrando 15 cartas por página. Cada carta incluye una imagen del Pokémon y un botón "Ver detalles" que despliega un popup con información adicional del Pokémon.
+A responsive Pokémon browser built with **React** and the public [PokéAPI](https://pokeapi.co/). Browse all 1,025 Pokémon as cards, search by name and open a popup with each Pokémon's details.
 
-La aplicación también cuenta con un buscador, permitiendo ingresar el nombre de un Pokémon y dirigir a la página donde se encuentra, resaltándolo en amarillo.
+**Live demo:** https://agustindevc.github.io/pokeapi/
 
-## Instalación y Ejecución
-Para ejecutar el proyecto localmente, sigue estos pasos:
+## Features
+- Card grid with pagination (15 Pokémon per page, 63 pages).
+- Details popup per Pokémon: species, types, abilities, height, weight and base stats.
+- Search by name; the result is highlighted in the list.
+- Loading skeletons and error handling for failed requests.
+- Light/dark color mode and responsive layout.
 
-1. Clona el repositorio:
-   ```sh
-   git clone https://github.com/tu-usuario/pokemon-app.git
-   cd pokemon-app
-   ```
-2. Instala las dependencias con npm:
-   ```sh
-   npm install
-   ```
-3. Inicia la aplicación en modo desarrollo:
-   ```sh
-   npm run dev
-   ```
-4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
+## Tech stack
+- **React 19** + **Vite**
+- **Chakra UI** for components and theming
+- **TanStack React Query** for data fetching and caching
+- **GitHub Actions** deploying to **GitHub Pages**
 
-## Dependencias Principales
-- [React](https://react.dev/): Biblioteca de JavaScript para construir interfaces de usuario.
-- [Chakra UI](https://chakra-ui.com/): Biblioteca de componentes para React.
-- [React Router](https://reactrouter.com/) (si se usa para navegación entre páginas).
-- [Vite]: Herramienta de construcción rápida para aplicaciones React.
+## How it works
+- `src/services/pokemonService.jsx` wraps the API calls (`fetch`, async/await, error handling) and formats the responses.
+- Custom hooks in `src/components/hooks/` expose the data through React Query, so the Pokémon list is fetched once and cached.
+- The search filters the cached list, avoiding extra requests.
 
-## Características
-- Utiliza la [PokeAPI](https://pokeapi.co/) para obtener la información de los Pokémons.
-- Paginación de 15 Pokémons por página.
-- Popup con detalles del Pokémon.
-- Búsqueda por nombre con resalte en la lista.
+## Run it locally
+```bash
+git clone https://github.com/agustindevc/pokeapi.git
+cd pokeapi
+npm install
+echo "VITE_API_URL=https://pokeapi.co/api/v2/pokemon" > .env
+npm run dev
+```
+Then open the local address shown in the terminal (by default http://localhost:5173/pokeapi/).
 
-## Contribución
-Si deseas contribuir a este proyecto:
-1. Haz un fork del repositorio.
-2. Crea una nueva rama (`git checkout -b feature-nueva-funcionalidad`).
-3. Realiza tus cambios y haz commit (`git commit -m "Descripción del cambio"`).
-4. Envía un pull request.
+## Deployment
+Every push to `main` triggers `.github/workflows/deploy.yml`, which builds the app and publishes it to GitHub Pages.
+
+## What I learned
+- Structuring a React app into components, hooks and a service layer.
+- Caching server state with React Query instead of managing it by hand.
+- Consuming a REST API with `fetch` and handling loading and error states.
+- Setting up a CI/CD pipeline with GitHub Actions.
+
+---
+
+## Español
+Aplicación web en React que consume la PokéAPI: tarjetas con paginación (15 por página), popup con los detalles de cada Pokémon y buscador por nombre que resalta el resultado. Hecha con React, Vite, Chakra UI y TanStack React Query, y desplegada automáticamente en GitHub Pages. Demo: https://agustindevc.github.io/pokeapi/
