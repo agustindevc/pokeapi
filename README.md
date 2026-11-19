@@ -7,9 +7,9 @@ A responsive Pokémon browser built with **React** and the public [PokéAPI](htt
 ## Features
 - Card grid with pagination (15 Pokémon per page, 63 pages).
 - Details popup per Pokémon: species, types, abilities, height, weight and base stats.
-- Search by name; the result is highlighted in the list.
-- Loading skeletons and error handling for failed requests.
-- Light/dark color mode and responsive layout.
+- Search by name (prefix match) over the cached list, with a button to clear the search.
+- Loading and error handling for failed requests.
+- Responsive layout.
 
 ## Tech stack
 - **React 19** + **Vite**
@@ -44,4 +44,4 @@ Every push to `main` triggers `.github/workflows/deploy.yml`, which builds the a
 ---
 
 ## Español
-Aplicación web en React que consume la PokéAPI: tarjetas con paginación (15 por página), popup con los detalles de cada Pokémon y buscador por nombre que resalta el resultado. Hecha con React, Vite, Chakra UI y TanStack React Query, y desplegada automáticamente en GitHub Pages. Demo: https://agustindevc.github.io/pokeapi/
+Aplicación web en React que consume la PokéAPI: tarjetas con paginación (15 por página), popup con los detalles de cada Pokémon y buscador por nombre con opción de limpiar la búsqueda. Hecha con React, Vite, Chakra UI y TanStack React Query, y desplegada automáticamente en GitHub Pages. Demo: https://agustindevc.github.io/pokeapi/
